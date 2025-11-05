@@ -1,0 +1,79 @@
+name: Publish dev snapshot on PR merge
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  publish-dev:
+    if: >
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      github.event.pull_request.title != 'Version Packages' &&
+      github.event.pull_request.head.ref != 'changeset-release/main'
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_CONFIG_USERCONFIG: ${{ github.workspace }}/.npmrc.ci
+    steps:
+      - name: Checkout merged main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+
+      - name: Auth GitHub Packages
+        run: |
+          echo "@${{ github.repository_owner }}:registry=https://npm.pkg.github.com" > "$NPM_CONFIG_USERCONFIG"
+          echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> "$NPM_CONFIG_USERCONFIG"
+          echo "always-auth=true" >> "$NPM_CONFIG_USERCONFIG"
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Detect changesets
+        id: changesets
+        run: |
+          COUNT=$(git ls-files .changeset/*.md 2>/dev/null | wc -l | tr -d ' ')
+          if [ "$COUNT" -eq 0 ]; then
+            echo "Aucun changeset → rien à publier (on attend la PR release)."
+            exit 0
+          fi
+          echo "Changesets présents: $COUNT"
+
+      - name: Version snapshot (prefix 'dev')
+        run: |
+          echo "Génération snapshot avec prefix 'dev'"
+          pnpm changeset version --snapshot "dev"
+
+      - name: Build
+        run: pnpm build
+
+      - name: Publish snapshot (dist-tag dev)
+        run: pnpm changeset publish --tag dev --no-git-tag
+
+      - name: Restore package.json
+        if: always()
+        run: git checkout -- packages
+
+      - name: Summary
+        run: |
+          echo "Dev snapshot publiée (prefix 'dev')."
+          echo "Dist-tag: dev"
+          echo "PR merge: #${{ github.event.pull_request.number }}"

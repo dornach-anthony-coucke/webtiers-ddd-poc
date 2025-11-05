@@ -1,0 +1,55 @@
+name: changeset-pr
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: changeset-pr-main
+  cancel-in-progress: true
+
+jobs:
+  create-or-update-release-pr:
+    if: ${{ !contains(github.event.head_commit.message, 'Version Packages') }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_CONFIG_USERCONFIG: ${{ github.workspace }}/.npmrc.ci
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # On prend tout l’historique pour que Changesets puisse calculer correctement
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Optionnel: build pour détecter des problèmes avant d’ouvrir la PR release
+      - name: Verify build
+        run: pnpm build
+
+      - name: Changesets - create/update PR
+        uses: changesets/action@v1
+        with:
+          # NE PAS publier ici; juste la PR
+          publish: false
+          # Si tu veux que l'action ne commit rien d'autre que les versions, laisse comme ça.
+          # (commitMode par défaut; config .changeset/config.json peut aussi gérer 'commit': false)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
