@@ -1,6 +1,5 @@
 export abstract class AbstractAggregate<EventType> {
   private _pending_events: EventType[] = [];
-
   protected abstract applyEvent<Event extends EventType>(event: Event): void;
 
   protected recordEvent(event: EventType): void {

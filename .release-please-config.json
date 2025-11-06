@@ -1,16 +1,25 @@
 {
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "packages": {
+    "packages/accounting/domain": {
+      "release-type": "node",
+      "package-name": "@webtiers-ddd-poc/accounting-domain"
+    },
+    "packages/company-registry/domain": {
+      "release-type": "node",
+      "package-name": "@webtiers-ddd-poc/company-registry-domain"
+    },
     "packages/shared/domain": {
       "release-type": "node",
-      "package-name": "@webtiers-ddd-poc/shared-domain",
-      "include-v-in-tag": false
-    },    
+      "package-name": "@webtiers-ddd-poc/shared-domain"
+    },
     "packages/shared/application": {
       "release-type": "node",
-      "package-name": "@webtiers-ddd-poc/shared-application",
-      "include-v-in-tag": false
+      "package-name": "@webtiers-ddd-poc/shared-application"
     }
   },
   "release-type": "node",
-  "include-v-in-tag": false
+  "include-v-in-tag": false,
+  "tag-separator": "-v",
+  "bump-minor-pre-major": true
 }

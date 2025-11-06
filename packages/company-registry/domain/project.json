@@ -1,0 +1,38 @@
+{
+  "name": "@webtiers-ddd-poc/company-registry-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/company-registry/domain/src",
+  "projectType": "library",
+  "implicitDependencies": [
+    "@webtiers-ddd-poc/shared-domain"
+  ],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["^build"],
+      "options": {
+        "command": "pnpm --filter @webtiers-ddd-poc/company-registry-domain run build"
+      },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["packages/company-registry/domain/src/**/*.ts"]
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @webtiers-ddd-poc/company-registry-domain run clean"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @webtiers-ddd-poc/company-registry-domain run typecheck"
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,1 +1,2 @@
-export * from './aggregates/abstract-aggregate';
+export * from './aggregates/abstract-aggregate.js';
+export * from './value-objects/address.value-object.js';

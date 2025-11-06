@@ -1,17 +1,33 @@
 {
-  "name": "shared/domain",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@webtiers-ddd-poc/shared-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/shared/domain/src",
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
+      "dependsOn": ["^build"],
       "options": {
-        "outputPath": "dist/packages/shared/domain",
-        "main": "packages/shared/domain/src/index.ts",
-        "tsConfig": "packages/shared/domain/tsconfig.lib.json",
-        "assets": ["packages/shared/domain/*.md"]
+        "command": "pnpm --filter @webtiers-ddd-poc/shared-domain run build"
+      },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["packages/shared/domain/src/**/*.ts"]
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @webtiers-ddd-poc/shared-domain run clean"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @webtiers-ddd-poc/shared-domain run typecheck"
       }
     }
   },
