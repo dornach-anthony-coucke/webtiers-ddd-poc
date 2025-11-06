@@ -5,10 +5,13 @@ export const baseConfig = defineConfig({
     watch: false,
     passWithNoTests: true,
     include: ['src/**/*.(spec|test).ts'],
-    reporters: ['default'],
     coverage: {
-      enabled: false,
-      reporter: ['text', 'lcov']
-    }
+      enabled: true,
+      reporter: ['text', 'html', 'lcov'],
+      provider: 'v8' as const,
+      reportsDirectory: './coverage/'
+    },    
+    globals: true,
+    environment: 'node',
   }
 });

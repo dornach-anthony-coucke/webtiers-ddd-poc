@@ -11,12 +11,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/shared/domain/*": ["packages/shared-domain/"],
-      "@/shared/application/*": ["packages/shared-application/"],
-      "@webtiers-ddd-poc/shared-application": [
-        "packages/shared-application/src/index.ts"
-      ],
-      "@webtiers-ddd-poc/shared-domain": ["packages/shared-domain/src/index.ts"]
+      "@/shared/domain": ["packages/shared/domain"],
+      "@/shared/application": ["packages/shared/application"],
     }
   }
 }
