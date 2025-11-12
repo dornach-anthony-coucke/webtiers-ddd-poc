@@ -1,0 +1,16 @@
+{
+  "packages": {
+    "packages/shared/domain": {
+      "release-type": "node",
+      "package-name": "@webtiers-ddd-poc/shared-domain",
+      "include-v-in-tag": false
+    },    
+    "packages/shared/application": {
+      "release-type": "node",
+      "package-name": "@webtiers-ddd-poc/shared-application",
+      "include-v-in-tag": false
+    }
+  },
+  "release-type": "node",
+  "include-v-in-tag": false
+}

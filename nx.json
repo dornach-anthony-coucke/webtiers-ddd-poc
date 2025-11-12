@@ -1,8 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "workspaceLayout": {
-    "libsDir": "packages",
-    "appsDir": "apps"
+    "libsDir": "packages"
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
@@ -65,19 +64,5 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }
-  },
-  "dependencyConstraints": [
-    {
-      "sourceTag": "layer:domain",
-      "onlyDependOnLibsWithTags": ["layer:domain", "context:shared"]
-    },
-    {
-      "sourceTag": "layer:application",
-      "onlyDependOnLibsWithTags": [
-        "layer:application",
-        "layer:domain",
-        "context:shared"
-      ]
-    }
-  ]
+  }
 }
