@@ -23,5 +23,8 @@
     "build": "tsup",
     "clean": "rimraf dist",
     "typecheck": "tsc -p tsconfig.lib.json --noEmit"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
