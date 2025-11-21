@@ -1,6 +1,6 @@
 {
   "name": "@webtiers-ddd-poc/accounting-domain",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": false,
   "type": "module",
   "main": "./dist/index.cjs",
@@ -14,7 +14,10 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
