@@ -1,4 +1,11 @@
 {
-  "extends": "./tsconfig.base.json",
-  "include": ["packages"]
+  "files": [],
+  "references": [
+    { "path": "packages/shared/domain" },
+    { "path": "packages/shared/application" },
+    { "path": "packages/accounting/domain" },
+    { "path": "packages/accounting/application" },
+    { "path": "packages/company-registry/domain" },
+    { "path": "packages/company-registry/application" }
+  ]
 }

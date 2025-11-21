@@ -1,1 +1,1 @@
-export * from './interfaces/command-handler.interface';
+export * from './interfaces/command-handler.interface.js';

@@ -1,0 +1,35 @@
+{
+  "name": "@webtiers-ddd-poc/accounting-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/accounting/domain/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["^build"],
+      "options": {
+        "command": "pnpm --filter @webtiers-ddd-poc/accounting-domain run build"
+      },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["packages/accounting/domain/src/**/*.ts"]
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @webtiers-ddd-poc/accounting-domain run clean"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @webtiers-ddd-poc/accounting-domain run typecheck"
+      }
+    }
+  },
+  "tags": []
+}

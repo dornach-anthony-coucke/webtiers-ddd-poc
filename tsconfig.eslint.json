@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@webtiers-ddd-poc/shared-domain": ["packages/shared/domain/src/index.ts"],
+      "@webtiers-ddd-poc/shared-application": ["packages/shared/application/src/index.ts"],
+      "@webtiers-ddd-poc/company-registry-domain": ["packages/company-registry/domain/src/index.ts"],
+      "@webtiers-ddd-poc/company-registry-application": ["packages/company-registry/application/src/index.ts"],
+      "@webtiers-ddd-poc/accounting-domain": ["packages/accounting/domain/src/index.ts"],
+      "@webtiers-ddd-poc/accounting-application": ["packages/accounting/application/src/index.ts"]
+    }
+  },
+  "include": ["packages/**/src/**/*.ts"]
+}
