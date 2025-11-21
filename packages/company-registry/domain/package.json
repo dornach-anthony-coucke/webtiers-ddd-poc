@@ -24,6 +24,9 @@
     "dist",
     "README.md"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "@webtiers-ddd-poc/shared-domain": "workspace:*"
   }
