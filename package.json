@@ -2,16 +2,23 @@
   "name": "@webtiers-ddd-poc/source",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/**/*"],
+  "workspaces": [
+    "packages/**/*"
+  ],
   "packageManager": "pnpm@10.20.0",
   "scripts": {
     "build": "nx run-many --target=build --all",
     "lint": "nx run-many -t lint --all",
     "test": "nx run-many -t test --all -- --run",
     "typecheck": "nx run-many --target=typecheck --all",
-    "graph": "nx graph"
+    "graph": "nx graph",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "publish-packages": "pnpm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.7",
     "@eslint/js": "^9.39.1",
     "@nx/eslint": "22.0.2",
     "@nx/eslint-plugin": "^22.0.2",
@@ -31,13 +38,12 @@
     "jiti": "2.4.2",
     "nx": "22.0.2",
     "prettier": "^2.6.2",
+    "rimraf": "^5.0.5",
     "tslib": "^2.3.0",
+    "tsup": "^8.5.1",
     "typescript": "5.9.3",
     "typescript-eslint": "^8.46.3",
     "vite": "^7.0.0",
-    "vitest": "^3.0.0",
-    "tsup": "^7.3.0",
-    "rimraf": "^5.0.5"
-  },
-  "dependencies": {}
+    "vitest": "^3.0.0"
+  }
 }
