@@ -94,6 +94,25 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.10.0)(@vitest/ui@3.2.4)(jiti@2.4.2)(yaml@2.8.1)
 
+  packages/company-registry/application:
+    dependencies:
+      '@dornach-anthony-coucke/company-registry-domain':
+        specifier: workspace:*
+        version: link:../domain
+      '@dornach-anthony-coucke/shared-application':
+        specifier: workspace:*
+        version: link:../../shared/application
+
+  packages/company-registry/domain:
+    dependencies:
+      '@dornach-anthony-coucke/shared-domain':
+        specifier: workspace:*
+        version: link:../../shared/domain
+
+  packages/shared/application: {}
+
+  packages/shared/domain: {}
+
 packages:
 
   '@ampproject/remapping@2.3.0':

@@ -10,6 +10,7 @@
     "build": "nx run-many --target=build --all",
     "lint": "nx run-many -t lint --all",
     "test": "nx run-many -t test --all -- --run",
+    "clean": "nx run-many -t clean --all -- --run",
     "typecheck": "nx run-many --target=typecheck --all",
     "graph": "nx graph",
     "changeset": "changeset",
