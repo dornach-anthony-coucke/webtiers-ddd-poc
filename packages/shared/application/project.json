@@ -1,5 +1,5 @@
 {
-  "name": "@dornach-anthony-coucke/dornach-anthony-couckec/shared-application",
+  "name": "@dornach-anthony-coucke/shared-application",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/shared/application/src",
   "projectType": "library",

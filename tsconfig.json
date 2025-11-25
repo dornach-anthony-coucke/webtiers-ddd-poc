@@ -2,6 +2,8 @@
   "files": [],
   "references": [
     { "path": "packages/shared/domain" },
-    { "path": "packages/shared/application" }
+    { "path": "packages/shared/application" },
+    { "path": "packages/company-registry/domain" },
+    { "path": "packages/company-registry/application" }
   ]
 }
